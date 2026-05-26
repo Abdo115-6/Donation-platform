@@ -62,6 +62,9 @@ export default function Navbar() {
             <Link href="/dashboard/donations" className="hover:text-primary">
               Donations
             </Link>
+            <Link href="/dashboard/profile" className="hover:text-primary">
+              Profile
+            </Link>
             <Link href="/dashboard/settings" className="hover:text-primary">
               Settings
             </Link>
@@ -123,6 +126,13 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
             >
               Donations
+            </Link>
+            <Link
+              href="/dashboard/profile"
+              className="block hover:text-primary"
+              onClick={() => setIsOpen(false)}
+            >
+              Profile
             </Link>
             <Link
               href="/dashboard/settings"
