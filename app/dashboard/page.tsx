@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { hasSupabaseEnv } from '@/lib/supabase/config'
 import Navbar from '@/components/navbar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -12,6 +13,35 @@ import { RealtimeDonations } from '@/components/realtime-donations'
 import { Plus, BarChart3, Activity } from 'lucide-react'
 
 export default async function DashboardPage() {
+  if (!hasSupabaseEnv()) {
+    return (
+      <>
+        <Navbar />
+        <main className="min-h-screen bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="mb-8">
+              <h1 className="text-3xl md:text-4xl font-bold">Dashboard</h1>
+              <p className="text-muted-foreground mt-2">
+                Connect Supabase to access campaigns, donations, and analytics.
+              </p>
+            </div>
+            <Card>
+              <CardContent className="pt-6 space-y-4">
+                <p className="text-sm text-muted-foreground">
+                  Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+                  to `.env.local`, then restart the dev server.
+                </p>
+                <Link href="/">
+                  <Button variant="outline">Back to Home</Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
+      </>
+    )
+  }
+
   const supabase = await createClient()
 
   const { data: { user } } = await supabase.auth.getUser()

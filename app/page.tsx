@@ -1,4 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
+import { hasSupabaseEnv } from '@/lib/supabase/config'
+import { DEMO_CAMPAIGNS } from '@/lib/demo-data'
 import Navbar from '@/components/navbar'
 import { CampaignCard } from '@/components/campaign-card'
 import { Button } from '@/components/ui/button'
@@ -6,31 +8,35 @@ import Link from 'next/link'
 import { Heart } from 'lucide-react'
 
 export default async function HomePage() {
-  const supabase = await createClient()
-
-  const { data: campaigns } = await supabase
-    .from('campaigns')
-    .select('*')
-    .eq('status', 'active')
-    .order('created_at', { ascending: false })
-
   let campaignsWithDonorCounts: any[] = []
+  
+  if (hasSupabaseEnv()) {
+    const supabase = await createClient()
 
-  if (campaigns && campaigns.length > 0) {
-    const donationCounts = await Promise.all(
-      campaigns.map(async (campaign) => {
-        const { count } = await supabase
-          .from('donations')
-          .select('*', { count: 'exact', head: true })
-          .eq('campaign_id', campaign.id)
-        return { campaignId: campaign.id, count: count || 0 }
+    const { data: campaigns } = await supabase
+      .from('campaigns')
+      .select('*')
+      .eq('status', 'active')
+      .order('created_at', { ascending: false })
+
+    if (campaigns && campaigns.length > 0) {
+      const donationCounts = await Promise.all(
+        campaigns.map(async (campaign) => {
+          const { count } = await supabase
+            .from('donations')
+            .select('*', { count: 'exact', head: true })
+            .eq('campaign_id', campaign.id)
+          return { campaignId: campaign.id, count: count || 0 }
+        })
+      )
+
+      campaignsWithDonorCounts = campaigns.map((campaign) => {
+        const donorCount = donationCounts.find((dc) => dc.campaignId === campaign.id)?.count || 0
+        return { ...campaign, donorCount }
       })
-    )
-
-    campaignsWithDonorCounts = campaigns.map((campaign) => {
-      const donorCount = donationCounts.find((dc) => dc.campaignId === campaign.id)?.count || 0
-      return { ...campaign, donorCount }
-    })
+    }
+  } else {
+    campaignsWithDonorCounts = DEMO_CAMPAIGNS
   }
 
   return (

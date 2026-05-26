@@ -4,18 +4,25 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { hasSupabaseEnv } from '@/lib/supabase/config'
 import { Button } from '@/components/ui/button'
 import { Menu, X, Heart } from 'lucide-react'
 
 export default function Navbar() {
   const router = useRouter()
-  const supabase = createClient()
+  const supabaseEnabled = hasSupabaseEnv()
+  const supabase = supabaseEnabled ? createClient() : null
   const [isOpen, setIsOpen] = useState(false)
   const [user, setUser] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(supabaseEnabled)
 
   // Get user on mount
   useEffect(() => {
+    if (!supabase) {
+      setLoading(false)
+      return
+    }
+
     const getUser = async () => {
       const {
         data: { user },
@@ -24,9 +31,11 @@ export default function Navbar() {
       setLoading(false)
     }
     getUser()
-  }, [])
+  }, [supabase])
 
   const handleLogout = async () => {
+    if (!supabase) return
+
     await supabase.auth.signOut()
     setUser(null)
     router.push('/')
