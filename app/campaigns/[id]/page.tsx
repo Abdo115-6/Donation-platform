@@ -69,7 +69,7 @@ export default async function CampaignDetailPage({
     <>
       <Navbar />
       <RealtimeDonations />
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background text-foreground">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Back Button */}
           <Link href="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-8">
@@ -97,8 +97,7 @@ export default async function CampaignDetailPage({
                 <h1 className="text-4xl font-bold mb-4">{campaign.title}</h1>
                 <p className="text-lg text-muted-foreground">{campaign.description}</p>
               </div>
-
-              {/* Creator Info */}
+{/* Creator Info */}
               <Card>
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-4">

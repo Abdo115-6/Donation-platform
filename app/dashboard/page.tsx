@@ -17,7 +17,7 @@ export default async function DashboardPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-background">
+        <main className="min-h-screen bg-background text-foreground">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="mb-8">
               <h1 className="text-3xl md:text-4xl font-bold">Dashboard</h1>
@@ -133,27 +133,29 @@ export default async function DashboardPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background text-foreground">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold">Dashboard</h1>
-              <p className="text-muted-foreground mt-2">Manage your campaigns, track donations, and view analytics</p>
-            </div>
-            <div className="flex gap-3">
-              <Link href="/dashboard/donations">
-                <Button variant="outline">
-                  <BarChart3 className="w-4 h-4 mr-2" />
-                  Donations
-                </Button>
-              </Link>
-              <Link href="/dashboard/create">
-                <Button>
-                  <Plus className="w-4 h-4 mr-2" />
-                  New Campaign
-                </Button>
-              </Link>
+          <div className="mb-8 rounded-lg border border-border/70 bg-card/85 p-5 shadow-sm shadow-slate-950/5 backdrop-blur-sm dark:shadow-black/20 sm:p-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">Dashboard</h1>
+                <p className="text-muted-foreground mt-2">Manage your campaigns, track donations, and view analytics</p>
+              </div>
+              <div className="flex gap-3">
+                <Link href="/dashboard/donations">
+                  <Button variant="outline" className="border-border/70 bg-background/80 hover:bg-accent">
+                    <BarChart3 className="w-4 h-4 mr-2" />
+                    Donations
+                  </Button>
+                </Link>
+                <Link href="/dashboard/create">
+                  <Button>
+                    <Plus className="w-4 h-4 mr-2" />
+                    New Campaign
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -168,20 +170,20 @@ export default async function DashboardPage() {
           {/* Activity Feed & Campaigns */}
           <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
-            <h2 className="text-2xl font-bold mb-6">Your Campaigns</h2>
-            {campaigns && campaigns.length > 0 ? (
-              <CampaignList campaigns={campaigns} />
-            ) : (
-              <Card>
-                <CardContent className="pt-6 text-center">
-                  <p className="text-muted-foreground mb-4">You haven&apos;t created any campaigns yet.</p>
-                  <Link href="/dashboard/create">
-                    <Button>Create Your First Campaign</Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            )}
-          </div>
+              <h2 className="text-2xl font-bold tracking-tight text-foreground">Your Campaigns</h2>
+              {campaigns && campaigns.length > 0 ? (
+                <CampaignList campaigns={campaigns} />
+              ) : (
+                <Card>
+                  <CardContent className="pt-6 text-center">
+                    <p className="text-muted-foreground mb-4">You haven&apos;t created any campaigns yet.</p>
+                    <Link href="/dashboard/create">
+                      <Button>Create Your First Campaign</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
 
           {/* Activity Feed Sidebar */}
           <div className="lg:col-span-1">

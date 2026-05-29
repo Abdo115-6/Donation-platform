@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label'
 import { OAuthProviders } from '@/components/oauth-providers'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { Heart } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Page() {
@@ -44,12 +45,18 @@ export default function Page() {
   }
 
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+    <div className="flex min-h-svh w-full items-center justify-center bg-background p-6 md:p-10">
       <div className="w-full max-w-sm">
         <div className="flex flex-col gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl">Login</CardTitle>
+          <Card className="border-border/70 bg-card/95 shadow-2xl shadow-slate-950/10 backdrop-blur-sm dark:shadow-black/25">
+            <CardHeader className="space-y-3">
+              <Link href="/" className="flex w-fit items-center gap-2 text-foreground">
+                <span className="flex size-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                  <Heart className="w-5 h-5 fill-current text-current" />
+                </span>
+                <span className="font-bold tracking-tight">DonationFlow</span>
+              </Link>
+              <CardTitle className="text-2xl text-foreground">Login</CardTitle>
               <CardDescription>
                 Enter your email below to login to your account
               </CardDescription>
@@ -95,7 +102,7 @@ export default function Page() {
                 Don&apos;t have an account?{' '}
                 <Link
                   href="/auth/sign-up"
-                  className="underline underline-offset-4"
+                  className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
                 >
                   Sign up
                 </Link>

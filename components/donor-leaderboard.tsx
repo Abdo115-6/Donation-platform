@@ -30,7 +30,7 @@ export function DonorLeaderboard({ donors }: DonorLeaderboardProps) {
   const topDonors = donors.slice(0, 10)
 
   return (
-    <Card>
+    <Card className="overflow-hidden">
       <CardHeader>
         <CardTitle className="text-lg flex items-center gap-2">
           <Trophy className="w-5 h-5 text-yellow-500" />
@@ -42,7 +42,7 @@ export function DonorLeaderboard({ donors }: DonorLeaderboardProps) {
           {topDonors.map((donor, index) => (
             <div
               key={index}
-              className={`flex items-center justify-between p-2 rounded-lg border ${
+              className={`flex items-center justify-between rounded-lg border p-3 ${
                 index < 3 ? rankColors[index] : 'border-transparent'
               }`}
             >

@@ -73,7 +73,7 @@ export const DEMO_CAMPAIGNS = [
   },
 ]
 
-export const DEMO_DONATIONS: Record<string, { donor_name: string; amount: number; message: string; anonymous: boolean; donor_email: string | null }[]> = {
+export const DEMO_DONATIONS: Record<string, { donor_name: string | null; amount: number; message: string | null; anonymous: boolean; donor_email: string | null }[]> = {
   'demo-1': [
     { donor_name: 'Alice Johnson', amount: 500, message: 'Libraries change lives!', anonymous: false, donor_email: null },
     { donor_name: 'Bob Smith', amount: 250, message: 'Great initiative!', anonymous: false, donor_email: null },

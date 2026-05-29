@@ -97,56 +97,6 @@ export function ActivityFeed({ userId }: ActivityFeedProps) {
   }, [userId])
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg flex items-center gap-2">
-          <Activity className="w-5 h-5 text-primary" />
-          Recent Activity
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        {loading ? (
-          <div className="space-y-3">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="flex items-start gap-3 animate-pulse">
-                <div className="w-8 h-8 bg-muted rounded-full" />
-                <div className="flex-1 space-y-1">
-                  <div className="h-4 bg-muted rounded w-3/4" />
-                  <div className="h-3 bg-muted rounded w-1/2" />
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : activities.length === 0 ? (
-          <p className="text-muted-foreground text-center py-8">No activity yet. Create a campaign to get started!</p>
-        ) : (
-          <ScrollArea className="h-[400px]">
-            <div className="space-y-4">
-              {activities.map((event) => (
-                <div key={event.id} className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center shrink-0">
-                    {event.icon}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium">{event.title}</p>
-                    <p className="text-xs text-muted-foreground truncate">{event.description}</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      {event.amount && (
-                        <span className="text-xs font-semibold text-green-600">
-                          +MAD {event.amount.toLocaleString()}
-                        </span>
-                      )}
-                      <span className="text-xs text-muted-foreground">
-                        {formatDistanceToNow(new Date(event.timestamp), { addSuffix: true })}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </ScrollArea>
-        )}
-      </CardContent>
-    </Card>
-  )
+    <Card className="overflow-hidden"></Card>
+      )
 }

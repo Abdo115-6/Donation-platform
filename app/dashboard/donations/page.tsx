@@ -29,7 +29,7 @@ export default async function DonationsPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-background">
+        <main className="min-h-screen bg-background text-foreground">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <h1 className="text-3xl md:text-4xl font-bold mb-2">Donations</h1>
             <p className="text-muted-foreground mb-8">
@@ -63,7 +63,7 @@ export default async function DonationsPage() {
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-background">
+        <main className="min-h-screen bg-background text-foreground">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <h1 className="text-3xl md:text-4xl font-bold mb-2">Donations</h1>
             <p className="text-muted-foreground mb-8">Track and manage donations for your campaigns</p>
@@ -98,16 +98,16 @@ export default async function DonationsPage() {
   const uniqueDonors = new Set(donationsWithCampaign.filter(d => d.donor_email).map(d => d.donor_email)).size
 
   const stats = [
-    { title: 'Total Donations', value: totalDonations, icon: Heart, color: 'bg-red-100 dark:bg-red-900', textColor: 'text-red-600 dark:text-red-400' },
-    { title: 'Total Raised', value: `MAD ${totalRaised.toLocaleString()}`, icon: TrendingUp, color: 'bg-green-100 dark:bg-green-900', textColor: 'text-green-600 dark:text-green-400' },
-    { title: 'Platform Fees', value: `MAD ${totalFees.toLocaleString()}`, icon: Wallet, color: 'bg-amber-100 dark:bg-amber-900', textColor: 'text-amber-600 dark:text-amber-400' },
-    { title: 'Unique Donors', value: uniqueDonors, icon: Users, color: 'bg-purple-100 dark:bg-purple-900', textColor: 'text-purple-600 dark:text-purple-400' },
+     { title: 'Total Donations', value: totalDonations, icon: Heart, color: 'bg-red-100 dark:bg-red-500/10 dark:ring-1 dark:ring-red-500/20', textColor: 'text-red-600 dark:text-red-300' },
+    { title: 'Total Raised', value: `MAD ${totalRaised.toLocaleString()}`, icon: TrendingUp, color: 'bg-green-100 dark:bg-green-500/10 dark:ring-1 dark:ring-green-500/20', textColor: 'text-green-600 dark:text-green-300' },
+    { title: 'Platform Fees', value: `MAD ${totalFees.toLocaleString()}`, icon: Wallet, color: 'bg-amber-100 dark:bg-amber-500/10 dark:ring-1 dark:ring-amber-500/20', textColor: 'text-amber-600 dark:text-amber-300' },
+    { title: 'Unique Donors', value: uniqueDonors, icon: Users, color: 'bg-purple-100 dark:bg-purple-500/10 dark:ring-1 dark:ring-purple-500/20', textColor: 'text-purple-600 dark:text-purple-300' },
   ]
 
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background text-foreground">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-bold">Donations</h1>
@@ -166,8 +166,8 @@ export default async function DonationsPage() {
                             <span>{donation.donor_name || 'Unknown'}</span>
                           )}
                         </TableCell>
-                        <TableCell className="font-semibold text-green-600">MAD {parseFloat(donation.amount).toLocaleString()}</TableCell>
-                        <TableCell className="text-amber-600 text-sm">
+                        <TableCell className="font-semibold text-green-600 dark:text-green-400">MAD {parseFloat(donation.amount).toLocaleString()}</TableCell>
+                        <TableCell className="text-amber-600 text-sm dark:text-amber-400">
                           MAD {parseFloat(donation.platform_fee || '0').toLocaleString()}
                         </TableCell>
                         <TableCell className="max-w-[200px] truncate text-muted-foreground">

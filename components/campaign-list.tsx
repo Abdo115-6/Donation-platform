@@ -108,7 +108,7 @@ export function CampaignList({ campaigns }: CampaignListProps) {
   return (
     <div className="space-y-4">
       {/* Search & Filter Controls */}
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col gap-3 rounded-2xl border border-border/70 bg-card/90 p-4 shadow-sm shadow-slate-950/5 backdrop-blur-sm sm:flex-row dark:shadow-black/20">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
@@ -146,21 +146,21 @@ export function CampaignList({ campaigns }: CampaignListProps) {
           const progress = (parseFloat(campaign.current_amount) / parseFloat(campaign.goal_amount)) * 100
 
           return (
-            <Card key={campaign.id}>
+            <Card key={campaign.id} className="transition-shadow hover:shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:hover:shadow-[0_18px_40px_rgba(0,0,0,0.24)]">
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-lg truncate">{campaign.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{campaign.category}</p>
+                    <p className="mt-2 inline-flex rounded-full border border-red-200/70 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700 shadow-sm shadow-red-950/5 dark:border-red-500/20 dark:bg-red-500/10 dark:text-red-100">{campaign.category}</p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <span
                       className={`text-xs px-2 py-1 rounded-full font-medium ${
                         campaign.status === 'active'
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                          ? 'bg-green-50 text-green-700 ring-1 ring-green-100 dark:bg-green-900 dark:text-green-200'
                           : campaign.status === 'paused'
-                          ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                          : 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
+                          ? 'bg-yellow-50 text-yellow-700 ring-1 ring-yellow-100 dark:bg-yellow-900 dark:text-yellow-200'
+                          : 'bg-gray-50 text-gray-700 ring-1 ring-gray-100 dark:bg-gray-900 dark:text-gray-200'
                       }`}
                     >
                       {campaign.status}
@@ -198,7 +198,7 @@ export function CampaignList({ campaigns }: CampaignListProps) {
                   </div>
                 </div>
 
-                <div className="flex gap-2 pt-4 border-t">
+                <div className="flex gap-2 pt-4 border-t border-border/60">
                   <Link href={`/campaigns/${campaign.id}`} className="flex-1">
                     <Button variant="ghost" size="sm" className="w-full">
                       <Eye className="w-4 h-4 mr-2" />
